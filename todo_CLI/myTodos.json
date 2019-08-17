@@ -1,0 +1,16 @@
+[{
+    "complete": true,
+    "text": "Take out the trash"
+}, {
+    "complete": true,
+    "text": "Buy toothpaste"
+}, {
+    "complete": false,
+    "text": "Buy Snickerdoodles"
+}, {
+    "complete": false,
+    "text": "Fix the climate"
+}, {
+    "complete": false,
+    "text": "Find a cure for aging"
+}]
