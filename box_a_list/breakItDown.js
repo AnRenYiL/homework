@@ -1,12 +1,12 @@
 const drawLine = (number) => '\u2501'.repeat(number);
 // console.log(drawLine(4));
-const drawTopBorder = (number) => '\u250f' + '\u2501'.repeat(number) + '\u2513';
+const drawTopBorder = (number) => '\u250f' + drawLine(number) + '\u2513';
 // console.log(drawTopBorder(4));
 // console.log(drawTopBorder(0));
-const drawMiddleBorder = (number) => '\u2523' + '\u2501'.repeat(number) + '\u252b';
+const drawMiddleBorder = (number) => '\u2523' + drawLine(number) + '\u252b';
 // console.log(drawMiddleBorder(4));
 // console.log(drawMiddleBorder(0));
-const drawBottomBorder = (number) => '\u2517' + '\u2501'.repeat(number) + '\u251b';
+const drawBottomBorder = (number) => '\u2517' + drawLine(number) + '\u251b';
 // console.log(drawBottomBorder(4));
 // console.log(drawBottomBorder(0));
 const drawBarsAround = (str) => '\u2503' + str + '\u2503';
