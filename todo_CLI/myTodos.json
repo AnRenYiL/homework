@@ -1,16 +1,1 @@
-[{
-    "complete": true,
-    "text": "Take out the trash"
-}, {
-    "complete": true,
-    "text": "Buy toothpaste"
-}, {
-    "complete": false,
-    "text": "Buy Snickerdoodles"
-}, {
-    "complete": false,
-    "text": "Fix the climate"
-}, {
-    "complete": false,
-    "text": "Find a cure for aging"
-}]
+[{"completed":true,"title":"Take out the trash"},{"completed":true,"title":"Buy toothpaste"},{"completed":false,"title":"Buy Snickerdoodles"},{"completed":false,"title":"Find a cure for aging"},{"completed":false,"title":"abc"}]

@@ -20,17 +20,10 @@ if (jsonFilename) {
     todoCLI();
 }
 
-
-
 function todoCLI() {
-
-
-
     console.log('Welcome to Todo CLI!');
     console.log('--------------------');
-
-
-    rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n',
+    rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n',
         answer => {
             tryAgain(answer)
         });
@@ -38,7 +31,7 @@ function todoCLI() {
     function tryAgain(answer) {
         if (answer === 'v') {
             viewItems();
-            rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n', answer => tryAgain(answer));
+            rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n', answer => tryAgain(answer));
         } else if (answer === 'q') {
             console.log('\nSee you soon! 😄');
             rl.close();
@@ -46,35 +39,35 @@ function todoCLI() {
             newItem();
         } else if (answer.indexOf('c') == 0) {
             completeItem(answer.substring(1, answer.length));
-            rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n', answer => tryAgain(answer));
+            rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n', answer => tryAgain(answer));
         } else if (answer.indexOf('d') == 0) {
             deleteItem(answer.substring(1, answer.length));
-            rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n', answer => tryAgain(answer));
+            rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n', answer => tryAgain(answer));
+        } else if (answer === 's') {
+            saveItems();
         } else {
-            rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n', answer => tryAgain(answer));
+            rl.question('(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n', answer => tryAgain(answer));
         }
     }
 
     function viewItems() {
-        console.log();
         if (todoList.length > 0) {
             todoList.forEach((element, index) => {
                 let comp;
-                element.complete ? comp = '[✓]' : comp = '[ ]';
-                console.log(`${index} ${comp} ${element.text}`);
+                element.completed ? comp = '[✓]' : comp = '[ ]';
+                console.log(`\n${index} ${comp} ${element.title}\n`);
             });
         } else {
-            console.log("List is empty...");
+            console.log("\nList is empty...\n");
         }
-        console.log();
     }
 
     function newItem() {
         console.log();
         rl.question('What? \n', answer => {
             todoList.push({
-                complete: false,
-                text: answer
+                completed: false,
+                title: answer
             });
             console.log();
             tryAgain('');
@@ -82,20 +75,44 @@ function todoCLI() {
     }
 
     function completeItem(index) {
-        console.log();
         if (todoList[index]) {
-            todoList[index].complete = true;
-            console.log(`Completed "${todoList[index].text}"`);
+            todoList[index].completed = true;
+            console.log(`\nCompleted "${todoList[index].title}"\n`);
         } else {
-            console.log(`Don't have item ${index}`);
+            console.log(`\nDon't have item ${index}\n`);
         }
-        console.log();
     }
 
     function deleteItem(index) {
-        console.log();
-        console.log(`Deleted "${todoList[index].text}"`);
+        console.log(`\nDeleted "${todoList[index].title}"`);
         todoList.splice(index, 1);
         console.log();
+    }
+
+    function saveItems() {
+        let question = '';
+        jsonFilename == null ? question = '\nWhere? \n' : question = `\nWhere? (${jsonFilename})\n`;
+        rl.question(question, answer => {
+            let saveFilename = '';
+            if (answer) {
+                saveFilename = answer;
+            } else {
+                saveFilename = jsonFilename;
+            }
+            if ((answer == null || answer == '') && (jsonFilename == null)) {
+                console.log("please write the name\n");
+                tryAgain('');
+            } else {
+                const fs = require('fs');
+                fs.writeFile(saveFilename, JSON.stringify(todoList), (err) => {
+                    if (err) {
+                        console.log('ERROR HAPPENED');
+                    } else {
+                        console.log(`List saved to "${saveFilename}\n"`);
+                        tryAgain('');
+                    }
+                });
+            }
+        });
     }
 }
