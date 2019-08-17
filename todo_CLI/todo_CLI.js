@@ -2,21 +2,24 @@ const readline = require('readline');
 const rl = readline.Interface({
     input: process.stdin,
     output: process.stdout,
-    prompt: '> '
+    prompt: '> ' // use rl.prompt() to get it, but I don't know how to use it in question()
 });
-let todoList = [];
+let todoList = []; // all the todo thing put into this array
 const jsonFilename = process.argv[2];
-if (jsonFilename) {
+// check if jsonFilename is null or not
+if (jsonFilename) { // not null
     const fs = require('fs');
+    // read data
     fs.readFile(jsonFilename, (err, data) => {
         if (err) {
             console.log('Error reading file');
         } else {
+            // convert string into json data and give it to todoList
             todoList = JSON.parse(data);
             todoCLI();
         }
     });
-} else {
+} else { // null
     todoCLI();
 }
 
@@ -51,8 +54,10 @@ function todoCLI() {
     }
 
     function viewItems() {
+        // if there has items in todoList, use for loop to log every item
         if (todoList.length > 0) {
             todoList.forEach((element, index) => {
+                // put a checkmark in front of the title if the completed is true
                 let comp;
                 element.completed ? comp = '[✓]' : comp = '[ ]';
                 console.log(`\n${index} ${comp} ${element.title}\n`);
@@ -65,6 +70,7 @@ function todoCLI() {
     function newItem() {
         console.log();
         rl.question('What? \n', answer => {
+            // push the new item into todoList
             todoList.push({
                 completed: false,
                 title: answer
@@ -75,6 +81,8 @@ function todoCLI() {
     }
 
     function completeItem(index) {
+        // if todoList has this index, change the completed=true
+        // if not, log don't have this item
         if (todoList[index]) {
             todoList[index].completed = true;
             console.log(`\nCompleted "${todoList[index].title}"\n`);
@@ -85,6 +93,8 @@ function todoCLI() {
 
     function deleteItem(index) {
         console.log(`\nDeleted "${todoList[index].title}"`);
+        //get rid of an item from todoList by the index
+        // splice will remove item(s) from index, the next argument is the amount to remove
         todoList.splice(index, 1);
         console.log();
     }
@@ -104,11 +114,12 @@ function todoCLI() {
                 tryAgain('');
             } else {
                 const fs = require('fs');
+                // JSON.stringify convert array to json string
                 fs.writeFile(saveFilename, JSON.stringify(todoList), (err) => {
                     if (err) {
                         console.log('ERROR HAPPENED');
                     } else {
-                        console.log(`List saved to "${saveFilename}\n"`);
+                        console.log(`List saved to "${saveFilename}"\n`);
                         tryAgain('');
                     }
                 });
