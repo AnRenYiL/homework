@@ -67,21 +67,20 @@ class Turtle {
         return this;
     }
     allPoints() {
-        // this.getMaxAndMin();
-        // let valX = 0,
-        //     valY = 0;
-        // if (this.minX < 0) {
-        //     valX = 1 - this.minX;
-        // }
-        // if (this.minY < 0) {
-        //     valY = 1 - this.minY;
-        // }
-        // let result = [];
-        // this.allPointsArr.forEach(element => {
-        //     result.push([element[0] + valX, element[1] + valY]);
-        // });
-        // return result;
-        return this.allPointsArr;
+        this.getMaxAndMin();
+        let valX = 0,
+            valY = 0;
+        if (this.minX < 0) {
+            valX = 1 - this.minX;
+        }
+        if (this.minY < 0) {
+            valY = 1 - this.minY;
+        }
+        let result = [];
+        this.allPointsArr.forEach(element => {
+            result.push([element[0] + valX, element[1] + valY]);
+        });
+        return result;
     }
     print() {
         this.printMap();
