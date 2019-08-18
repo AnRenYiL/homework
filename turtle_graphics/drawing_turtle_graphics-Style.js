@@ -129,7 +129,8 @@ class Turtle {
         }
     }
 }
-const query = 'f10-r-r-f10-l-f5-l-f10-r-f5-r-f11';
+// const query = 'f10-r-r-f10-l-f5-l-f10-r-f5-r-f11';
+const query = process.argv[2];
 if (query) {
     const arr = query.split('-');
     let startNum = 0;
