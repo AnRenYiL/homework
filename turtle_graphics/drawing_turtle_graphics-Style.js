@@ -95,7 +95,16 @@ class Turtle {
             item[2] == true ? result += '■' : result += '□';
         }
         result += '\n-- END LOG\n';
-        console.log(result);
+        if (filename) {
+            const fs = require('fs');
+            fs.writeFile(filename, result, (err) => {
+                if (err) {
+                    console.log('ERROR HAPPENED');
+                } else {
+                    console.log(`🐢 Drawing written to ${filename}!`);
+                }
+            });
+        } else console.log(result);
     }
     printMap() {
         this.getMaxAndMin();
@@ -130,7 +139,15 @@ class Turtle {
     }
 }
 // const query = 'f10-r-r-f10-l-f5-l-f10-r-f5-r-f11';
-const query = process.argv[2];
+let query, filename;
+if (process.argv[2]) {
+    if (process.argv[3]) {
+        query = process.argv[3];
+        filename = process.argv[2].split('=')[1];
+    } else {
+        query = process.argv[2];
+    }
+}
 if (query) {
     const arr = query.split('-');
     let startNum = 0;
