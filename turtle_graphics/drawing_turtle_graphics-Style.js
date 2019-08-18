@@ -129,27 +129,43 @@ class Turtle {
         }
     }
 }
-// const flash = new Turtle(0, 4)
-//     .forward(3)
-//     .left()
-//     .forward(3)
-//     .right()
-//     .forward(5)
-//     .right()
-//     .forward(8)
-//     .right()
-//     .forward(5)
-//     .right()
-//     .forward(3)
-//     .left()
-//     .forward(3);
-// flash.print();
-// console.log(flash.allPoints());
-// const flash = new Turtle(0, 0).forward(3).left().forward(3);
-// flash.print();
-// console.log(flash.allPoints());
-
-// new Turtle(0, 0).forward(5).right().forward(5).print();
-const flash = new Turtle(0, 0).forward(3).left().forward(3);
-flash.print();
-console.log(flash.allPoints());
+const query = 'f10-r-r-f10-l-f5-l-f10-r-f5-r-f11';
+if (query) {
+    const arr = query.split('-');
+    let startNum = 0;
+    let flash;
+    if (arr[0].includes('t')) {
+        const coordinate = arr[0].substring(1).split(',');
+        flash = new Turtle(parseInt(coordinate[0]), parseInt(coordinate[1]));
+        startNum = 1;
+    } else {
+        flash = new Turtle(0, 0);
+    }
+    for (let i = startNum; i < arr.length; i++) {
+        if (arr[i].includes('f')) {
+            flash.forward(parseInt(arr[i].substring(1)));
+        } else if (arr[i] === 'r') {
+            flash.right();
+        } else {
+            flash.left();
+        }
+    }
+    flash.print();
+} else {
+    const flash = new Turtle(0, 4)
+        .forward(3)
+        .left()
+        .forward(3)
+        .right()
+        .forward(5)
+        .right()
+        .forward(8)
+        .right()
+        .forward(5)
+        .right()
+        .forward(3)
+        .left()
+        .forward(3);
+    flash.print();
+    console.log(flash.allPoints());
+}
