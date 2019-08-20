@@ -21,7 +21,7 @@ if (parametersArr.length <= 2) {
     console.log(drawTopBorder(maxlength));
     for (let i = 2; i < parametersArr.length; i++) {
         console.log(drawBarsByStr(parametersArr[i], maxlength));
-        if (!((i == parametersArr.length - 1 && i == 0) || i == parametersArr.length - 1)) {
+        if (!(parametersArr.length - 1 == 0 || i == parametersArr.length - 1)) {
             console.log(drawMiddleBorder(maxlength));
         }
     }
