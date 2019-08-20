@@ -12,23 +12,23 @@ class Turtle {
         // east:[1, 0]; south:[0,1]; west:[-1,0]; north:[0,-1];
         this.directionArr = [1, 0];
         this.mapArr = [];
-        this.maxX = 0;
-        this.minX = 0;
-        this.maxY = 0;
-        this.minY = 0;
+        this.maxX = x;
+        this.minX = x;
+        this.maxY = y;
+        this.minY = y;
         return this;
     }
     right() {
         this.direction++;
         switch (this.direction) {
             case 2:
-                this.directionArr = [0, 1];
+                this.directionArr = [0, -1];
                 break;
             case 3:
                 this.directionArr = [-1, 0];
                 break;
             case 4:
-                this.directionArr = [0, -1];
+                this.directionArr = [0, 1];
                 break;
             default:
                 this.direction = 1;
@@ -44,14 +44,14 @@ class Turtle {
                 this.directionArr = [1, 0];
                 break;
             case 2:
-                this.directionArr = [0, 1];
+                this.directionArr = [0, -1];
                 break;
             case 3:
                 this.directionArr = [-1, 0];
                 break;
             default:
                 this.direction = 4;
-                this.directionArr = [0, -1];
+                this.directionArr = [0, 1];
                 break;
         }
         return this;
@@ -67,20 +67,21 @@ class Turtle {
         return this;
     }
     allPoints() {
-        this.getMaxAndMin();
-        let valX = 0,
-            valY = 0;
-        if (this.minX < 0) {
-            valX = 1 - this.minX;
-        }
-        if (this.minY < 0) {
-            valY = 1 - this.minY;
-        }
-        let result = [];
-        this.allPointsArr.forEach(element => {
-            result.push([element[0] + valX, element[1] + valY]);
-        });
-        return result;
+        // this.getMaxAndMin();
+        // let valX = 0,
+        //     valY = 0;
+        // if (this.minX < 0) {
+        //     valX = 1 - this.minX;
+        // }
+        // if (this.minY < 0) {
+        //     valY = 1 - this.minY;
+        // }
+        // let result = [];
+        // this.allPointsArr.forEach(element => {
+        //     result.push([element[0] + valX, element[1] + valY]);
+        // });
+        // return result;
+        return this.allPointsArr;
     }
     print() {
         this.printMap();
@@ -108,8 +109,8 @@ class Turtle {
     }
     printMap() {
         this.getMaxAndMin();
-        for (let i = this.minY; i <= this.maxY; i++) {
-            for (let j = this.minX; j <= this.maxX + 1; j++) {
+        for (let i = this.maxY; i >= this.minY; i--) {
+            for (let j = this.minX; j <= this.maxX; j++) {
                 this.mapArr.push([j, i, false]);
             }
         }
@@ -184,6 +185,6 @@ if (query) {
         .forward(3)
         .left()
         .forward(3);
+    // const flash = new Turtle(0, 0).forward(3).left().forward(3);
     flash.print();
-    console.log(flash.allPoints());
 }
