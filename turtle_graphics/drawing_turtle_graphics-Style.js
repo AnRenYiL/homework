@@ -4,7 +4,7 @@ class Turtle {
         this.allPointsArr = []; // all the points in this array
         this.allPointsArr.push(this.presentPosition);
         this.sequentialPoints = []; // use for print()
-        let temp = [this.presentPosition[0], this.presentPosition[1]];
+        let temp = [x, y];
         temp.push(false);
         this.sequentialPoints.push(temp);
         // 1: east; 2: south; 3: west; 4: north
