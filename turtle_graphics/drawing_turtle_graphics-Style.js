@@ -137,6 +137,20 @@ class Turtle {
                 this.minY = item[1];
             }
         }
+        //#region check if the map start with [0,0]
+        if (this.maxX + this.minX < 0) {
+            this.maxX = 0;
+        }
+        if (this.maxY + this.minY < 0) {
+            this.maxY = 0;
+        }
+        if (this.minX > 0) {
+            this.minX = 0;
+        }
+        if (this.minY > 0) {
+            this.minY = 0;
+        }
+        //#endregion
     }
 }
 // const query = 'f10-r-r-f10-l-f5-l-f10-r-f5-r-f11';
@@ -170,6 +184,7 @@ if (query) {
         }
     }
     flash.print();
+    // console.log(flash.allPoints());
 } else {
     const flash = new Turtle(0, 4)
         .forward(3)
