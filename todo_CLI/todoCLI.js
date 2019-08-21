@@ -2,7 +2,7 @@ const readline = require('readline');
 const rl = readline.Interface({
     input: process.stdin,
     output: process.stdout,
-    prompt: '> ' // use rl.prompt() to get it, but I don't know how to use it in question()
+    prompt: '> '
 });
 let todoList = []; // all the todo thing put into this array
 const jsonFilename = process.argv[2];
@@ -22,8 +22,9 @@ if (jsonFilename) { // not null
 } else { // null
     todoCLI();
 }
-let inSave = false;
-let inNew = false;
+
+let inSave = false; // check if the last input is 's'
+let inNew = false; // check if the last input is 'n'
 
 function todoCLI() {
     console.log('Welcome to Todo CLI!');
@@ -36,7 +37,7 @@ function todoCLI() {
         } else if (inNew) {
             newItem(answer);
             console.log('\n(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n');
-            inNew = false;
+            inNew = false; // change it to false, so the next input should be one of the menu
             rl.prompt();
         } else {
             if (answer === 'v') {
@@ -46,7 +47,7 @@ function todoCLI() {
                 console.log('\nSee you soon! 😄');
                 process.exit(0);
             } else if (answer === 'n') {
-                inNew = true;
+                inNew = true; // change it to true, so the next input is the new item title
                 console.log('\nWhat? \n');
             } else if (answer.indexOf('c') == 0) {
                 completeItem(answer.substring(1, answer.length));
@@ -55,7 +56,7 @@ function todoCLI() {
                 deleteItem(answer.substring(1, answer.length));
                 console.log('\n(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n');
             } else if (answer === 's') {
-                inSave = true;
+                inSave = true; // change it to true, so the next input is the filename
                 let question = '';
                 jsonFilename == null ? question = '\nWhere? \n' : question = `\nWhere? (${jsonFilename})\n`;
                 console.log(question);
@@ -126,7 +127,7 @@ function todoCLI() {
                     console.log(`List saved to "${saveFilename}"\n`);
                 }
                 console.log('\n(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n');
-                inSave = false;
+                inSave = false; // change it to false, so the next input should be one of the menu
                 rl.prompt();
             });
         }

@@ -1,8 +1,7 @@
 const readline = require('readline');
 const rl = readline.Interface({
     input: process.stdin,
-    output: process.stdout,
-    prompt: '> ' // use rl.prompt() to get it, but I don't know how to use it in question()
+    output: process.stdout
 });
 let todoList = []; // all the todo thing put into this array
 const jsonFilename = process.argv[2];
