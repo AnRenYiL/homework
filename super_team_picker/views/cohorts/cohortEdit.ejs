@@ -1,0 +1,40 @@
+<%- include("../partials/header.ejs")%> 
+<% if(cohort){%> 
+    <form action="/cohorts/<%= cohort.id%>" method="POST" class="my-2 d-flex flex-column">
+        <div class="form-group">
+            <label for="logoUrl">Logo Url</label>
+            <input type="text" class="form-control" value="<%= cohort.logoUrl%>" name="logoUrl" placeholder="eg. https://www.example.com/some.png">
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" value="<%= cohort.name%>" name="name" placeholder="Flying Funks">
+        </div>
+        <div class="form-group">
+            <label for="members">Members</label>
+            <textarea class="form-control" name="members" rows="3" placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark"><%= cohort.members%></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="submit" class="btn btn-outline-primary justify-content-end" value="Update">
+        </div>        
+    </form>
+<%} else{%>
+    <form action="/cohorts" method="POST" class="my-2 d-flex flex-column">
+        <div class="form-group">
+            <label for="logoUrl">Logo Url</label>
+            <input type="text" class="form-control" name="logoUrl" placeholder="eg. https://www.example.com/some.png">
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Flying Funks">
+        </div>
+        <div class="form-group">
+            <label for="members">Members</label>
+            <textarea class="form-control" name="members" rows="3" placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark"></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+            <input type="submit" class="btn btn-outline-primary justify-content-end" value="Submit">
+        </div>        
+    </form>
+<%}%>
+<%- include("../partials/footer.ejs")%>
