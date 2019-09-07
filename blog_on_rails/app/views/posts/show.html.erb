@@ -26,8 +26,6 @@
     </div>
     <%= f.submit "Submit", class:"btn btn-outline-primary" %>
     <% end %>
-
-
     <% if @comments!= nil%>
     <% @comments.each do |comment| %>
     <p><%= comment.body %> <br />
@@ -45,5 +43,4 @@
     </p>
     <% end %>
     <% end %>
-
 </div>
