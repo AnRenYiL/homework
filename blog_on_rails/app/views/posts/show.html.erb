@@ -1,0 +1,49 @@
+<div class="mx-3 my-3">
+    <% if @comment.errors.any? %>
+    <ul>
+        <% @comment.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <% end %>
+    <h4><%= @post.title%></h4>
+    <p><%= @post.body%></p>
+    <small>Posted <%= time_ago_in_words(@post.created_at) %> ago</small>
+    <div class="my-3">
+        <%= link_to "Edit", edit_post_path(@post), class:"btn btn-outline-warning "%>
+        <%= link_to "Delete", post_path(@post), class:"btn btn-outline-danger ", method: :delete, data:{confirm: "Are you sure?"}%>
+    </div>
+    <%= form_with(model: [@post, @comment], local: true,class: "my-3") do |f| %>
+    <div class="form-group">
+        <label>Comment</label>
+        <%= f.text_area(
+  :body,
+  cols: 50,
+  rows: 2,
+  placeholder: "What's on your mind?",
+  class: "form-control"
+  ) %>
+    </div>
+    <%= f.submit "Submit", class:"btn btn-outline-primary" %>
+    <% end %>
+
+
+    <% if @comments!= nil%>
+    <% @comments.each do |comment| %>
+    <p><%= comment.body %> <br />
+        <small>
+            Commented <%= time_ago_in_words(comment.created_at) %> ago
+        </small>
+        |
+        <small>
+            <%= link_to("Delete", post_comment_path(@post, comment), method: :delete,
+                            data: {
+                            confirm: "Are you sure?"
+                            }, 
+                            class: "") %>
+        </small>
+    </p>
+    <% end %>
+    <% end %>
+
+</div>
