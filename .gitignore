@@ -226,4 +226,7 @@ $RECYCLE.BIN/
 *.lnk
 
 tmp/
+tmp/cache/
+
+
 # End of https://www.gitignore.io/api/node,linux,rails,macos,windows
