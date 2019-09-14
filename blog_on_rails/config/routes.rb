@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: [:create, :destroy]
   end
+  resources :users
+  resources :sessions do
+    delete :destroy, on: :collection
+  end
 end

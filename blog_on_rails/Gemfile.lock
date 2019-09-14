@@ -58,6 +58,7 @@ GEM
       zeitwerk (~> 2.1, >= 2.1.8)
     autoprefixer-rails (9.6.1.1)
       execjs
+    bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
@@ -67,6 +68,7 @@ GEM
       sassc-rails (>= 2.0.0)
     builder (3.2.3)
     byebug (11.0.1)
+    cancancan (3.0.1)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     erubi (1.8.0)
@@ -199,9 +201,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.3.1)
   byebug
+  cancancan
   faker
   jbuilder (~> 2.7)
   jquery-rails
