@@ -7,11 +7,13 @@
     </ul>
     <% end %>
     <h4><%= @post.title%></h4>
-    <p><%= @post.body%></p>
+    <p style="word-wrap:break-word;"><%= @post.body%></p>
     <small>Posted <%= time_ago_in_words(@post.created_at) %> ago</small>
     <div class="my-3">
-        <%= link_to "Edit", edit_post_path(@post), class:"btn btn-outline-warning "%>
-        <%= link_to "Delete", post_path(@post), class:"btn btn-outline-danger ", method: :delete, data:{confirm: "Are you sure?"}%>
+        <% if can?(:crud, @post)%>
+            <%= link_to "Edit", edit_post_path(@post), class:"btn btn-outline-warning "%>
+            <%= link_to "Delete", post_path(@post), class:"btn btn-outline-danger ", method: :delete, data:{confirm: "Are you sure?"}%>
+        <%end%>
     </div>
     <%= form_with(model: [@post, @comment], local: true,class: "my-3") do |f| %>
     <div class="form-group">
@@ -32,14 +34,17 @@
         <small>
             Commented <%= time_ago_in_words(comment.created_at) %> ago
         </small>
+        <% if can?(:crud, comment, @post)%>
         |
         <small>
+        
             <%= link_to("Delete", post_comment_path(@post, comment), method: :delete,
                             data: {
                             confirm: "Are you sure?"
                             }, 
                             class: "") %>
         </small>
+        <%end%>
     </p>
     <% end %>
     <% end %>

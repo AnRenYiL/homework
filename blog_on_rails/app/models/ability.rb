@@ -5,6 +5,10 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+    
+    if user.is_admin?
+      can :manage, :all
+    end
 
     alias_action :create, :read, :edit, :update, :destroy, to: :crud
 
@@ -12,8 +16,12 @@ class Ability
       post.user == user
     end
 
-    can :crud, Comment do |comment|
-      comment.user == user
+    can :crud, Comment,Post do |comment, post|
+      comment.user == user || post.user == user
+    end
+
+    can :crud, User do |current_user|
+      current_user == user
     end
   end
 end

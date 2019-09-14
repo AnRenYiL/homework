@@ -16,4 +16,5 @@
     <%= f.email_field :email,class:'form-control'%>
 </div>
 <%= f.submit :submit, class:"btn btn-primary" %>
+<%= link_to "Change Password", change_password_users_path(current_user), class:"btn btn-danger"%>
 <% end%>
