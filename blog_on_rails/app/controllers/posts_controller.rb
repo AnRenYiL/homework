@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
+  before_action :autheticate_user!, only: [:new]
   def new
     @post = Post.new
     render :new
@@ -7,6 +8,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new post_params
+    @post.user = current_user
     if @post.save
       flash[:notice] = "Post created successfully"
       redirect_to post_path(@post)

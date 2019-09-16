@@ -11,16 +11,34 @@
 </head>
 
 <body>
-  <% flash[:notice] || flash[:alert]%>
+  <% flash.each do |type, message|%>
+  <div class="flush flush-<%= type%>">
+    <%= message%>
+  </div>
+  <% end%>
   <div class="d-flex flex-row justify-content-between bg-light">
     <h5 class="text-primary my-auto mx-2">Blog On Rails</h5>
     <ul class="nav justify-content-end mx-2">
+      <% if user_signed_in? %>
+        <li class="my-auto mx-3">
+        <span>Hello</span>
+        <%= link_to current_user.name, edit_user_path(current_user)%>
+        </li>
+        <li class="my-auto">
+        <%= link_to "Logout", sessions_path, method: :delete, data:{confirm: "Are you sure you want to log out"}%>
+        </li>
+      <% else%>
+        <li class="my-auto mx-3"><%= link_to "Login", new_session_path%> </li>
+        <li class="my-auto"><%= link_to "Sign Up", new_user_path%></li>
+      <% end%>
+      <li class="my-auto mx-2">|</li>
       <li class="nav-item">
         <%= link_to 'Home', root_path,class:'nav-link' %>
       </li>
       <li class="nav-item">
         <%= link_to 'New Post', new_post_path,class:'nav-link' %>
       </li>
+      
     </ul>
   </div>
   <%= yield %>

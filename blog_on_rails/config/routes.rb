@@ -5,4 +5,10 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: [:create, :destroy]
   end
+  resources :users 
+  get 'users/:id/change_password', {to: "users#show_change_password", as: :change_password_users}
+  patch 'users/:id/change_password', {to: "users#change_password"}
+  resources :sessions do
+    delete :destroy, on: :collection
+  end
 end
