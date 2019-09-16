@@ -1,0 +1,14 @@
+<%- include("../partials/header.ejs")%> 
+<% for(let cohort of cohorts){%>
+    <div class="card my-3" style="width: 100%;">
+        <div class="card-body">
+            <div class="d-flex flex-row">
+                <img src="<%= cohort.logoUrl%>" class="rounded-circle" width="40px" height="40px" alt="">
+                <h4 class="card-title mx-2 my-2"><%= cohort.name%></h4>
+            </div>
+            <p class="card-text"><%= cohort.members%></p>
+            <a href="/cohorts/<%= cohort.id%>" class="btn btn-primary">Show cohort</a>
+        </div>
+    </div>
+<%}%>
+<%- include("../partials/footer.ejs")%>
